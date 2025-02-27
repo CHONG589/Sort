@@ -20,11 +20,14 @@ int main() {
     test.testShellSort();
     test.testInsertSort();
     test.testQuickSort();
+    test.testSelectSort();
 
+    std::cout << std::endl;
     std::cout << "BubbleSort runtime: " << test.getBubblePerformance() << "ms" << std::endl;
     std::cout << "ShellSort runtime: " << test.getShellPerformance() << "ms" << std::endl;
     std::cout << "InsertSort runtime: " << test.getInsertPerformance() << "ms" << std::endl;
     std::cout << "QuickSort runtime: " << test.getQuickPerformance() << "ms" << std::endl;
+    std::cout << "SelectSort runtime: " << test.getSelectPerformance() << "ms" << std::endl;
     std::cout << std::endl;
 
     std::cout << "============采用几乎有序的随机数组进行测试===========" << std::endl;
@@ -37,11 +40,14 @@ int main() {
     test.testShellSort();
     test.testInsertSort();
     test.testQuickSort();
+    test.testSelectSort();
 
+    std::cout << std::endl;
     std::cout << "BubbleSort runtime: " << test.getBubblePerformance() << "ms" << std::endl;
     std::cout << "ShellSort runtime: " << test.getShellPerformance() << "ms" << std::endl;
     std::cout << "InsertSort runtime: " << test.getInsertPerformance() << "ms" << std::endl;
     std::cout << "QuickSort runtime: " << test.getQuickPerformance() << "ms" << std::endl;
+    std::cout << "SelectSort runtime: " << test.getSelectPerformance() << "ms" << std::endl;
 
     return 0;
 }

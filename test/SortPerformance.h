@@ -33,6 +33,7 @@ public:
     double getShellPerformance() { return shellPerformance; }
     double getInsertPerformance() { return insertPerformance; }
     double getQuickPerformance() { return quickPerformance; }
+    double getSelectPerformance() { return selectPerformance; }
 
     // 生成一定范围以内的随机数组
     void generateRanArr(const int &left, const int &right);
@@ -46,12 +47,14 @@ public:
     void testShellSort();
     void testInsertSort();
     void testQuickSort();
+    void testSelectSort();
 
 private:
     double bubblePerformance;
     double shellPerformance;
     double insertPerformance;
     double quickPerformance;
+    double selectPerformance;
 };
 
 void Test::generateRanArr(const int &left, const int &right) {
@@ -104,6 +107,7 @@ void Test::testBubbleSort() {
 
     //验证是否有序
     assert(isSorted(&bubbleSortArr));
+    std::cout << "BubbleArr is sorted..." << std::endl;
     // bubblePerformance = (double(endTime - startTime) / CLOCKS_PER_SEC);
     bubblePerformance = (endTime - startTime);
 }
@@ -116,6 +120,7 @@ void Test::testShellSort() {
 
     //验证是否有序
     assert(isSorted(&shellSortArr));
+    std::cout << "ShellArr is sorted..." << std::endl;
     shellPerformance = (endTime - startTime);
 }
 
@@ -127,6 +132,7 @@ void Test::testInsertSort() {
 
     //验证是否有序
     assert(isSorted(&insertSortArr));
+    std::cout << "InsertArr is sorted..." << std::endl;
     insertPerformance = (endTime - startTime);
 }
 
@@ -139,7 +145,20 @@ void Test::testQuickSort() {
 
     //验证是否有序
     assert(isSorted(&quickSortArr));
+    std::cout << "QuickArr is sorted..." << std::endl;
     quickPerformance = (endTime - startTime);
+}
+
+void Test::testSelectSort() {
+    TestArr selectSortArr(arr, length);
+    clock_t startTime = clock();
+    SelectSort(selectSortArr.getArr(), selectSortArr.getLength());
+    clock_t endTime = clock();
+
+    //验证是否有序
+    assert(isSorted(&selectSortArr));
+    std::cout << "selectArr is sorted..." << std::endl;
+    selectPerformance = (endTime - startTime);
 }
 
 #endif
