@@ -29,17 +29,22 @@ public:
     Test(int n) : TestArr(n) { bubblePerformance = 0; }
 
     double getBubblePerformance() { return bubblePerformance; }
+    double getShellPerformance() { return shellPerformance; }
+
     // 生成一定范围以内的随机数组
     void generateRanArr(const int &left, const int &right);
     // 生成几乎有序的随机数组
     void generateNearOrderArr();
+    
     void printArr();
     bool isSorted(TestArr *arr);
 
     void testBubbleSort();
+    void testShellSort();
 
 private:
     double bubblePerformance;
+    double shellPerformance;
 };
 
 void Test::generateRanArr(const int &left, const int &right) {
@@ -70,13 +75,24 @@ void Test::testBubbleSort() {
     TestArr bubbleSortArr(arr, length);
     clock_t startTime = clock();
     BubbleSort(bubbleSortArr.getArr(), bubbleSortArr.getLength());
+    clock_t endTime = clock();
 
     //验证是否有序
     assert(isSorted(&bubbleSortArr));
-
-    clock_t endTime = clock();
     // bubblePerformance = (double(endTime - startTime) / CLOCKS_PER_SEC);
     bubblePerformance = (endTime - startTime);
+}
+
+void Test::testShellSort() {
+    TestArr shellSortArr(arr, length);
+    clock_t startTime = clock();
+    ShellSort(shellSortArr.getArr(), shellSortArr.getLength());
+    clock_t endTime = clock();
+
+    //验证是否有序
+    assert(isSorted(&shellSortArr));
+    // bubblePerformance = (double(endTime - startTime) / CLOCKS_PER_SEC);
+    shellPerformance = (endTime - startTime);
 }
 
 #endif

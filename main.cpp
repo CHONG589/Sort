@@ -31,6 +31,8 @@ int main() {
     std::cout << std::endl;
     test.testBubbleSort();
     std::cout << "BubbleSort runtime: " << test.getBubblePerformance() << "ms" << std::endl;
+    test.testShellSort();
+    std::cout << "ShellSort runtime: " << test.getShellPerformance() << "ms" << std::endl;
 
     return 0;
 }

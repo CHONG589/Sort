@@ -11,8 +11,7 @@
 /**
  * @brief 冒泡排序
  */
-template<typename T>
-void BubbleSort1(T arr[], const int n) {
+void BubbleSort1(int arr[], const int n) {
     int i, j;
     int temp = 0;
 
@@ -35,8 +34,7 @@ void BubbleSort1(T arr[], const int n) {
 /**
  * 冒泡排序优化版
  */
-template<typename T>
-void BubbleSort(T arr[], const int n) {
+void BubbleSort(int arr[], const int n) {
     int k = n;
 
     // 如果一个循环下来，一次都没有交换相邻的元素，
@@ -50,8 +48,49 @@ void BubbleSort(T arr[], const int n) {
                 swaped = true;
             }
         }
+        // for (int i = 0; i < n; ++i) {
+        //     std::cout << arr[i] << " ";
+        // }
+        // std::cout << std::endl;
         --k;
     } while(swaped);
+}
+
+/**
+ * 希尔排序
+ */
+void ShellSort(int *arr, const int n) {
+    int j = 0;
+    int temp = 0;
+
+    //此循环控制增量的值，即取增量值为多少，增量值最小为1
+    for (int increment = n / 2; increment > 0; increment /= 2) {
+        //下面两个循环是跟直接插入排序差不多，都是控制选取两个值进行
+        //比较，只不过增量变为increment
+        for (int i = increment; i < n; ++i) {
+            //从后面开始选取
+            temp = arr[i];
+            for (j = i - increment; j >= 0; j -= increment) {
+                if (temp < arr[j]) {
+                    //temp是存较小的值的，每次比较都是和temp比较，
+                    //然后将前面大的值存后面。
+                    //j+increment 不能换成i, 只有第一次才是i
+                    arr[j + increment] = arr[j];
+                }
+                else {
+                    //遇到temp比较大了，则跳出此循环，将temp的值换
+                    //到j+increment，因为temp > j，所以将temp存到
+                    //j+increment
+                    break;
+                }
+            }
+            arr[j + increment] = temp;
+        }
+        // for (int i = 0; i < n; ++i) {
+        //     std::cout << arr[i] << " ";
+        // }
+        // std::cout << std::endl;
+    }
 }
 
 #endif
