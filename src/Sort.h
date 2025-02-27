@@ -93,4 +93,27 @@ void ShellSort(int *arr, const int n) {
     }
 }
 
+/**
+ * 直接插入排序
+ */
+void InsertSort(int *arr, const int n) {
+    int i, j, temp;
+
+    //从第二个数据开始，第一个元素可以认为已经被排序
+    for (i = 1; i < n; ++i) {
+        //取出一个数据，在已经排好序的序列中从后向前扫描
+        temp = arr[i];
+        for (j = i; j > 0 && temp < arr[j - 1]; --j) {
+            //将前面大的值移到后面
+            arr[j] = arr[j - 1];
+        }
+        arr[j] = temp;
+
+        // for (int i = 0; i < n; ++i) {
+        //     std::cout << arr[i] << " ";
+        // }
+        // std::cout << std::endl;
+    }
+}
+
 #endif

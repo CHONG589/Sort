@@ -30,21 +30,24 @@ public:
 
     double getBubblePerformance() { return bubblePerformance; }
     double getShellPerformance() { return shellPerformance; }
+    double getInsertPerformance() { return insertPerformance; }
 
     // 生成一定范围以内的随机数组
     void generateRanArr(const int &left, const int &right);
     // 生成几乎有序的随机数组
-    void generateNearOrderArr();
-    
+    void generateNearOrderArr(const int &left, const int &right);
+
     void printArr();
     bool isSorted(TestArr *arr);
 
     void testBubbleSort();
     void testShellSort();
+    void testInsertSort();
 
 private:
     double bubblePerformance;
     double shellPerformance;
+    double insertPerformance;
 };
 
 void Test::generateRanArr(const int &left, const int &right) {
@@ -52,6 +55,23 @@ void Test::generateRanArr(const int &left, const int &right) {
     srand(time(0));
     for (int i = 0; i < length; ++i) {
         arr[i] = rand() % (int)(right - left + 1) + left;
+    }
+}
+
+void Test::generateNearOrderArr(const int &left, const int &right) {
+    assert(left <= right);
+    int posx, posy = 0;
+    for (int i = 0; i < length; ++i) {
+        arr[i] = i + (right - left);
+    }
+    srand(time(0));
+    for (int j = 0; j < length / 2; ++j) {
+        posx = rand() % length;
+        posy = rand() % length;
+        if (posx == posy)
+            --j;
+        else    
+            std::swap(arr[posx], arr[posy]);
     }
 }
 
@@ -91,8 +111,18 @@ void Test::testShellSort() {
 
     //验证是否有序
     assert(isSorted(&shellSortArr));
-    // bubblePerformance = (double(endTime - startTime) / CLOCKS_PER_SEC);
     shellPerformance = (endTime - startTime);
+}
+
+void Test::testInsertSort() {
+    TestArr insertSortArr(arr, length);
+    clock_t startTime = clock();
+    InsertSort(insertSortArr.getArr(), insertSortArr.getLength());
+    clock_t endTime = clock();
+
+    //验证是否有序
+    assert(isSorted(&insertSortArr));
+    insertPerformance = (endTime - startTime);
 }
 
 #endif
