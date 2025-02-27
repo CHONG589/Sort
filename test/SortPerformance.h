@@ -6,6 +6,7 @@
 #ifndef SORTPERFORMANCE_H__
 #define SORTPERFORMANCE_H__
 
+#include <iostream>
 #include <ctime>
 #include <cassert>
 
@@ -31,6 +32,7 @@ public:
     double getBubblePerformance() { return bubblePerformance; }
     double getShellPerformance() { return shellPerformance; }
     double getInsertPerformance() { return insertPerformance; }
+    double getQuickPerformance() { return quickPerformance; }
 
     // 生成一定范围以内的随机数组
     void generateRanArr(const int &left, const int &right);
@@ -43,11 +45,13 @@ public:
     void testBubbleSort();
     void testShellSort();
     void testInsertSort();
+    void testQuickSort();
 
 private:
     double bubblePerformance;
     double shellPerformance;
     double insertPerformance;
+    double quickPerformance;
 };
 
 void Test::generateRanArr(const int &left, const int &right) {
@@ -85,6 +89,7 @@ void Test::printArr() {
 bool Test::isSorted(TestArr *arrObj) {
     for(int i = 0; i < arrObj->getLength() - 1; ++i) {
         if (arrObj->getArr()[i] > arrObj->getArr()[i + 1]) {
+            std::cout << "Array is not Sorted!!!" << std::endl;
             return false;
         }
     }
@@ -123,6 +128,18 @@ void Test::testInsertSort() {
     //验证是否有序
     assert(isSorted(&insertSortArr));
     insertPerformance = (endTime - startTime);
+}
+
+void Test::testQuickSort() {
+    TestArr quickSortArr(arr, length);
+    clock_t startTime = clock();
+    int n = quickSortArr.getLength();
+    QuickSort(quickSortArr.getArr(), 0, n - 1);
+    clock_t endTime = clock();
+
+    //验证是否有序
+    assert(isSorted(&quickSortArr));
+    quickPerformance = (endTime - startTime);
 }
 
 #endif

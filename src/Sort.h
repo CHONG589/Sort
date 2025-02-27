@@ -78,4 +78,35 @@ void InsertSort(int *arr, const int n) {
     }
 }
 
+/**
+ * 快速排序
+ */
+//划分函数
+//用第一个元素将待排序序列划分成左右两个部分
+int Partition(int *A, int low, int high) {
+    int pivot = A[low];
+    while(low < high) {
+        while(low < high && A[high] >= pivot) --high;
+        A[low] = A[high];
+        while(low < high && A[low] <= pivot) ++low;
+        A[high] = A[low];
+    }
+    A[low] = pivot;
+    return low;
+}
+
+//快速排序主体
+void QuickSort(int *A, int low, int high) {
+    if (low < high) {
+        int pivotpos = Partition(A, low, high);
+        // std::cout << A[pivotpos] << ": ";
+        // for (int i = 0; i <= high; ++i) {
+        //     std::cout << A[i] << " ";
+        // }
+        // std::cout << std::endl;
+        QuickSort(A, low, pivotpos - 1);
+        QuickSort(A, pivotpos + 1, high);
+    }
+}
+
 #endif
