@@ -1,3 +1,0 @@
-/home/zch/桌面/Sort/build/CMakeFiles/rebuild_cache.dir
-/home/zch/桌面/Sort/build/CMakeFiles/edit_cache.dir
-/home/zch/桌面/Sort/build/CMakeFiles/main.dir
