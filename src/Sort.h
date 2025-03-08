@@ -129,4 +129,55 @@ void SelectSort(int *A, int n) {
     }
 }
 
+/**
+ * 堆排序
+ */
+
+//将以 k 下标为根的子树调整为大根堆
+void HeadAdjust(int A[], int k, int len) {
+    //A[0] 暂存子树的根节点
+    A[0] = A[k];
+    //沿着向下调整该子树，2k 表示左孩子，
+    for(int i = 2 * k; i <= len; i *= 2) {
+        //右节点存在的情况下，如果左节点小于右节点，
+        //那么将下标移到右节点。
+        if(i < len && A[i] < A[i+1])
+            ++i;
+        //如果两个子节点都没有根节点大，不用调整，
+        //没有调整，自然就不会影响到大根堆，所以
+        //不用再继续查看后面的
+        if(A[0] >= A[i]) {
+            break;
+        }
+        else {
+            //将大的子节点移到父节点
+            A[k] = A[i];
+            k = i;
+        }
+    }
+    //根节点最终存放位置
+    A[k] = A[0];
+}
+
+//建立大根堆
+void BuildMaxHeap(int A[], int len) {
+    for(int i = len / 2; i > 0; --i)
+        HeadAdjust(A, i, len);
+}
+
+//堆排序
+void HeapSort(int A[], int len) {
+    BuildMaxHeap(A, len);
+    for(int i = len; i > 1; --i) {
+        int temp = A[i];
+        A[i] = A[1];
+        A[1] = temp;
+        HeadAdjust(A, 1, i - 1);
+        // for (int i = 1; i <= len; ++i) {
+        //     std::cout << A[i] << " ";
+        // }
+        // std::cout << std::endl;
+    }
+}
+
 #endif

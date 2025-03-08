@@ -34,6 +34,7 @@ public:
     double getInsertPerformance() { return insertPerformance; }
     double getQuickPerformance() { return quickPerformance; }
     double getSelectPerformance() { return selectPerformance; }
+    double getHeapPerformance() { return heapPerformance; }
 
     // 生成一定范围以内的随机数组
     void generateRanArr(const int &left, const int &right);
@@ -42,12 +43,14 @@ public:
 
     void printArr();
     bool isSorted(TestArr *arr);
+    bool isHeapSorted(TestArr *arr);
 
     void testBubbleSort();
     void testShellSort();
     void testInsertSort();
     void testQuickSort();
     void testSelectSort();
+    void testHeapSort();
 
 private:
     double bubblePerformance;
@@ -55,6 +58,7 @@ private:
     double insertPerformance;
     double quickPerformance;
     double selectPerformance;
+    double heapPerformance;
 };
 
 void Test::generateRanArr(const int &left, const int &right) {
@@ -159,6 +163,29 @@ void Test::testSelectSort() {
     assert(isSorted(&selectSortArr));
     std::cout << "selectArr is sorted..." << std::endl;
     selectPerformance = (endTime - startTime);
+}
+
+bool Test::isHeapSorted(TestArr *arrObj) {
+    for(int i = 1; i < arrObj->getLength() - 1; ++i) {
+        if (arrObj->getArr()[i] > arrObj->getArr()[i + 1]) {
+            std::cout << "Array is not Sorted!!!" << std::endl;
+            return false;
+        }
+    }
+    return true;
+}
+
+void Test::testHeapSort() {
+    TestArr HeapSortArr(length+1);
+    std::copy(arr, &arr[length], &(HeapSortArr.getArr()[1]));
+    clock_t startTime = clock();
+    HeapSort(HeapSortArr.getArr(), HeapSortArr.getLength());
+    clock_t endTime = clock();
+
+    //验证是否有序
+    assert(isHeapSorted(&HeapSortArr));
+    std::cout << "HeapArr is sorted..." << std::endl;
+    heapPerformance = (endTime - startTime);
 }
 
 #endif
