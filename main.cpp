@@ -22,6 +22,7 @@ int main() {
     test.testQuickSort();
     test.testSelectSort();
     test.testHeapSort();
+    test.testMergeSort();
 
     std::cout << std::endl;
     std::cout << "BubbleSort runtime: " << test.getBubblePerformance() << "ms" << std::endl;
@@ -30,6 +31,7 @@ int main() {
     std::cout << "QuickSort runtime: " << test.getQuickPerformance() << "ms" << std::endl;
     std::cout << "SelectSort runtime: " << test.getSelectPerformance() << "ms" << std::endl;
     std::cout << "HeapSort runtime: " << test.getHeapPerformance() << "ms" << std::endl;
+    std::cout << "MergeSort runtime: " << test.getMergePerformance() << "ms" << std::endl;
     std::cout << std::endl;
 
     std::cout << "============采用几乎有序的随机数组进行测试===========" << std::endl;
@@ -44,6 +46,7 @@ int main() {
     test.testQuickSort();
     test.testSelectSort();
     test.testHeapSort();
+    test.testMergeSort();
 
     std::cout << std::endl;
     std::cout << "BubbleSort runtime: " << test.getBubblePerformance() << "ms" << std::endl;
@@ -52,6 +55,7 @@ int main() {
     std::cout << "QuickSort runtime: " << test.getQuickPerformance() << "ms" << std::endl;
     std::cout << "SelectSort runtime: " << test.getSelectPerformance() << "ms" << std::endl;
     std::cout << "HeapSort runtime: " << test.getHeapPerformance() << "ms" << std::endl;
+    std::cout << "MergeSort runtime: " << test.getMergePerformance() << "ms" << std::endl;
 
     return 0;
 }

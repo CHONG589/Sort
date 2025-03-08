@@ -35,6 +35,7 @@ public:
     double getQuickPerformance() { return quickPerformance; }
     double getSelectPerformance() { return selectPerformance; }
     double getHeapPerformance() { return heapPerformance; }
+    double getMergePerformance() { return mergePerformance; }
 
     // 生成一定范围以内的随机数组
     void generateRanArr(const int &left, const int &right);
@@ -51,6 +52,7 @@ public:
     void testQuickSort();
     void testSelectSort();
     void testHeapSort();
+    void testMergeSort();
 
 private:
     double bubblePerformance;
@@ -59,6 +61,7 @@ private:
     double quickPerformance;
     double selectPerformance;
     double heapPerformance;
+    double mergePerformance;
 };
 
 void Test::generateRanArr(const int &left, const int &right) {
@@ -186,6 +189,20 @@ void Test::testHeapSort() {
     assert(isHeapSorted(&HeapSortArr));
     std::cout << "HeapArr is sorted..." << std::endl;
     heapPerformance = (endTime - startTime);
+}
+
+void Test::testMergeSort() {
+    TestArr mergeSortArr(arr, length);
+    int *B = new int[length];
+    clock_t startTime = clock();
+    MergeSort(mergeSortArr.getArr(), B, 0, mergeSortArr.getLength() - 1);
+    clock_t endTime = clock();
+
+    //验证是否有序
+    assert(isSorted(&mergeSortArr));
+    std::cout << "mergeArr is sorted..." << std::endl;
+    mergePerformance = (endTime - startTime);
+    delete[] B;
 }
 
 #endif
